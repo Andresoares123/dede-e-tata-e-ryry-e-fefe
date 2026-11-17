@@ -1,1 +1,0 @@
-# dede-e-tata-e-ryry-e-fefe
