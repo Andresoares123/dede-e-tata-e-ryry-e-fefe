@@ -102,6 +102,58 @@ Na Loja Cerrado:
 - PEDIDO possui identidade própria: ter FK não o torna, automaticamente, entidade fraca.
 - CLIENTE_PF e CLIENTE_PJ compartilham a identidade do supertipo por PK/FK.
 
+```mermaid
+erDiagram
+    CLIENTE ||--o{ PEDIDO : "realiza"
+    CLIENTE ||--o{ ENDERECO_ENTREGA : "possui"
+    PEDIDO ||--|{ ITEM : "contém"
+    PRODUTO ||--o{ ITEM : "participa"
+    CLIENTE ||--o| CLIENTE_PF : "especializa"
+    CLIENTE ||--o| CLIENTE_PJ : "especializa"
+
+    CLIENTE {
+        int cid PK
+        varchar nome
+        varchar cidade
+    }
+
+    PEDIDO {
+        int pid PK
+        int cid FK
+        varchar status
+    }
+
+    PRODUTO {
+        int rid PK
+        varchar descricao
+        varchar categoria
+    }
+
+    ITEM {
+        int pid PK, FK
+        int rid PK, FK
+        int qtd
+        decimal preco
+    }
+
+    ENDERECO_ENTREGA {
+        int cid PK, FK
+        int seq PK
+        varchar logradouro
+    }
+
+    CLIENTE_PF {
+        int cid PK, FK
+        char cpf
+    }
+
+    CLIENTE_PJ {
+        int cid PK, FK
+        char cnpj
+        varchar contato
+    }
+```
+
 Abra o cliente interativo:
 
 ```bash
